@@ -13,7 +13,8 @@ const boardSchema = new mongoose.Schema({
 
     mentor: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'teacher'
+        ref: 'teacher',
+        required: true
     },
 
     date: {
