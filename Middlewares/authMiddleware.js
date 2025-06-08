@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 
-const authController = {
+const authMiddleware = {
     auth: function (req, res, next) {
-        const token = req.header('authorization-token');
+        const token = req.headers.authorization?.split(" ")[1];
 
         // Verifica se o token foi fornecido
         if (!token) {
@@ -19,12 +19,12 @@ const authController = {
             next()
         } catch (error) {
             // Trata diferentes tipos de erros relacionados ao token
-            if (error.nome === 'TokenExpiredError') {
+            if (error.name === 'TokenExpiredError') {
                 return res.status(401).json({
                     error: 'Acesso Negado: O token expirou',
                     code: 401
                 });
-            } else if (error.nome === 'JsonWebTokenError') {
+            } else if (error.name === 'JsonWebTokenError') {
                 return res.status(401).json({
                     error: 'Acesso Negado: Token inválido',
                     code: 401
@@ -34,9 +34,8 @@ const authController = {
                     error: 'Erro no servidor: Não foi possível processar o token.',
                     code: 500
                 });
-
             }
         }
     }
 }
-module.exports = authController;
+module.exports = authMiddleware.auth;

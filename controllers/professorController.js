@@ -1,4 +1,5 @@
 const Professor = require('../models/Professor');
+const {Types} = require("mongoose");
 
 // Buscar todos os professores
 const getProfessores = async (req, res) => {
@@ -72,7 +73,12 @@ const atualizarProfessor = async (req, res) => {
 // Remover professor
 const removerProfessor = async (req, res) => {
     try {
-        const professor = await Professor.findByIdAndDelete(req.params.id);
+        const {id} = req.params;
+
+        if (!Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "ID inválido." });
+        }
+        const professor = await Professor.findByIdAndDelete(id);
         if (!professor) return res.status(404).json({message: "Professor não encontrado"});
         res.json({success: true});
     } catch (error) {

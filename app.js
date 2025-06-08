@@ -6,9 +6,8 @@ const connectDB = require('./database/db');
 const cors = require('cors');
 
 const userRouter = require('./routes/userRouter');
-const adminRouter = require('./routes/adminRouter');
-const teacherRouter = require('./routes/professorRouter');
-const boardRouter = require('./routes/bancaRouter');
+const professorRouter = require('./routes/professorRouter');
+const bancaRouter = require('./routes/bancaRouter');
 
 const app = express();
 
@@ -28,9 +27,8 @@ connectDB().then(() => console.log("Database connected successfully "));
 
 // Rotas
 app.use('/api/auth', userRouter)
-app.use('/admin', adminRouter)
-app.use('/professores', teacherRouter)
-app.use('/bancas', boardRouter)
+app.use('/api/professores', professorRouter)
+app.use('/api/bancas', bancaRouter)
 
 // Exporta o aplicativo
 module.exports = app;

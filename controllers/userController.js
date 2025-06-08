@@ -1,56 +1,9 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const {loginValidate, registerValidate} = require('./validate')
+const {loginValidate} = require('./validate')
 
 const userController = {
-    register: async function (req, res) {
-
-        try {
-            // Validação dos dados
-            const {error} = registerValidate(req.body);
-            if (error) {
-                return res.status(400).json({
-                    error: 'error.message',
-                    code: 400
-                });
-            }
-
-            // Verifica se o email já existe
-            const selectedUser = await User.findOne({email: req.body.email})
-            if (selectedUser) {
-                return res.status(400).json({
-                    error: 'O email já existe',
-                    code: 400
-                });
-            }
-            // Criação do novo usuário com hash assíncrono
-            const salt = await bcrypt.genSalt(10);
-            const hashedPassword = await bcrypt.hash(req.body.password, salt); // Criptografa a senha
-
-            // Criação do novo usuário
-            const user = new User({
-                nome: req.body.nome,
-                email: req.body.email,
-                password: hashedPassword
-            })
-
-
-            // Salva o usuário no banco de dados
-            const savedUser = await user.save()
-            res.status(201).json({
-                message: 'Usuário registrado com sucesso',
-                user: savedUser
-            });
-        } catch (error) {
-            res.status(500).json({
-                error: 'Erro Interno do Servidor',
-                details: error.message,
-                code: 500
-            });
-
-        }
-    },
     login: async function (req, res) {
 
         try {
@@ -104,6 +57,24 @@ const userController = {
 
     logout: async function (req, res) {
         res.json({success: true});
+    },
+
+    getCurrentUser: async (req, res) => {
+        try {
+            const token = req.headers.authorization?.split(" ")[1];
+            if (!token) return res.status(401).json({ error: "Token não fornecido" });
+
+            const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+            const user = await User.findById(decoded.id);
+
+            if (!user) return res.status(404).json({ error: "Usuário não encontrado" });
+
+            res.json(user);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
     }
+
 };
+
 module.exports = userController;

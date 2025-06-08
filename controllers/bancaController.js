@@ -86,4 +86,32 @@ const removerBanca = async (req, res) => {
     }
 };
 
-module.exports = {getBancas, getBancaPorId, criarBanca, atualizarBanca, removerBanca};
+const atualizarComposicaoBanca = async (req, res) => {
+    try {
+        const {bancaId} = req.params;
+        let {membros} = req.body;
+
+        // Valida se os membros foram enviados e se são um array
+        if (!membros || !Array.isArray(membros)) {
+            return res.status(400).json({error: 'O campo "membros" deve ser um array.'});
+        }
+
+        // Atualiza o campo 'membros' da banca
+        const updatedBanca = await Banca.findByIdAndUpdate(
+            bancaId,
+            {membros},
+            {new: true, runValidators: true}
+        );
+
+        if (!updatedBanca) {
+            return res.status(404).json({error: 'Banca não encontrada.'});
+        }
+
+        return res.status(200).json(updatedBanca);
+    } catch (error) {
+        console.error("Erro ao atualizar composição da banca:", error);
+        return res.status(500).json({error: "Falha ao atualizar membros. Tente novamente."});
+    }
+}
+
+module.exports = {getBancas, getBancaPorId, criarBanca, atualizarBanca, removerBanca, atualizarComposicaoBanca};

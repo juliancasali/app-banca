@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const boardController = require('../controllers/bancaController')
+const bancaController = require('../controllers/bancaController')
 
 const app = express();
 
-router.get('/list', boardController.getBancas);
-router.get('/:id', boardController.getBancaPorId);
-router.post('/create', boardController.criarBanca);
-router.put('/:id', boardController.atualizarBanca);
-router.delete('/:id', boardController.removerBanca);
+router.get('/', bancaController.getBancas);
+router.get('/:id', bancaController.getBancaPorId);
+router.post('/create', bancaController.criarBanca);
+router.put('/:id', bancaController.atualizarBanca);
+router.delete('/:id', bancaController.removerBanca);
+router.put('/:bancaId/membros', bancaController.atualizarComposicaoBanca)
 
 module.exports = router;
