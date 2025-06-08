@@ -6,12 +6,12 @@ const authController = require('../controllers/authController');
 // Verificar permissão de administrador
 const isAdmin = (req, res, next) => {
     if (req.user && req.user.admin) {
-        console.log(`Administrator access allowed: ${req.user.name}`) // Log de administrador
+        console.log(`Acesso de administrador permitido: ${req.user.nome}`) // Log de administrador
         return next(); // Usuário é admin, prossegue
     } else {
-        console.warn(`Access attempt denied. User: ${req.user ? req.user.name : 'Unknown'}`)
+        console.warn(`Tentativa de acesso negada. Usuário: ${req.user ? req.user.nome : 'Unknown'}`)
         return res.status(403).json({
-            error: 'Access Denied: Administrators only',
+            error: 'Acesso Negado: Apenas Administradores',
             code: 403
         }); // Proíbe o acesso (403 - Forbidden)
     }

@@ -7,8 +7,8 @@ const cors = require('cors');
 
 const userRouter = require('./routes/userRouter');
 const adminRouter = require('./routes/adminRouter');
-const teacherRouter = require('./routes/teacherRouter');
-const boardRouter = require('./routes/boardRouter');
+const teacherRouter = require('./routes/professorRouter');
+const boardRouter = require('./routes/bancaRouter');
 
 const app = express();
 
@@ -21,13 +21,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // cors
 app.use(cors());
-app.use(cors({origin: "http://localhost:3000" }));
+app.use(cors({origin: "http://localhost:5000" }));
 
 // conectar ao banco de dados
 connectDB().then(() => console.log("Database connected successfully "));
 
 // Rotas
-app.use('/user', userRouter)
+app.use('/api/auth', userRouter)
 app.use('/admin', adminRouter)
 app.use('/professores', teacherRouter)
 app.use('/bancas', boardRouter)

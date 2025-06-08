@@ -1,23 +1,23 @@
 const mongoose = require('mongoose');
 
-const boardSchema = new mongoose.Schema({
-    title: {
+const bancaSchema = new mongoose.Schema({
+    titulo: {
         type: String,
         required: true
     },
 
-    student: {
+    aluno: {
         type: String,
         required: true
     },
 
-    mentor: {
+    orientador: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'teacher',
+        ref: 'Professor',
         required: true
     },
 
-    date: {
+    data: {
         type: Date,
         required: true
     },
@@ -28,7 +28,7 @@ const boardSchema = new mongoose.Schema({
         default: "agendada"
     },
 
-    course: {
+    curso: {
         type: String
     },
 
@@ -40,4 +40,4 @@ const boardSchema = new mongoose.Schema({
     {timestamps: true}
 );
 
-module.exports = mongoose.model('Board', boardSchema);
+module.exports = mongoose.model('Board', bancaSchema);

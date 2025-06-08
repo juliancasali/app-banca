@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const teacherSchema = new mongoose.Schema({
-    name: {
+const professorSchema = new mongoose.Schema({
+    nome: {
         type: String,
         required: true,
         minLength: 3,
@@ -16,23 +16,23 @@ const teacherSchema = new mongoose.Schema({
         maxLength: 100
     },
 
-    department: {
+    departamento: {
         type: String,
         required: true,
     },
 
-    academicDegree: {
+    titulacao: {
         type: String,
         required: true,
     },
 
-    academicSpecializations: {
+    especialidades: {
         type: [String],
         required: true,
         default: [],
     },
 
-    active: {
+    ativo: {
         type: Boolean,
         default: true,
     }
@@ -40,4 +40,4 @@ const teacherSchema = new mongoose.Schema({
     { timestamps: true}
 )
 
-module.exports = mongoose.model('Teacher', teacherSchema);
+module.exports = mongoose.model('Professor', professorSchema);

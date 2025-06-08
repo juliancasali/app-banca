@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 
-
 const authController = {
     auth: function (req, res, next) {
         const token = req.header('authorization-token');
@@ -8,7 +7,7 @@ const authController = {
         // Verifica se o token foi fornecido
         if (!token) {
             return res.status(401).json({
-                error: 'Access Denied: No token provided',
+                error: 'Acesso Negado: Nenhum token fornecido',
                 code: 401
             });
         }
@@ -20,19 +19,19 @@ const authController = {
             next()
         } catch (error) {
             // Trata diferentes tipos de erros relacionados ao token
-            if (error.name === 'TokenExpiredError') {
+            if (error.nome === 'TokenExpiredError') {
                 return res.status(401).json({
-                    error: 'Access Denied: Token has expired',
+                    error: 'Acesso Negado: O token expirou',
                     code: 401
                 });
-            } else if (error.name === 'JsonWebTokenError') {
+            } else if (error.nome === 'JsonWebTokenError') {
                 return res.status(401).json({
-                    error: 'Access Denied: Invalid token',
+                    error: 'Acesso Negado: Token inválido',
                     code: 401
                 });
             } else {
                 return res.status(500).json({
-                    error: 'Server Error: Unable to process token',
+                    error: 'Erro no servidor: Não foi possível processar o token.',
                     code: 500
                 });
 

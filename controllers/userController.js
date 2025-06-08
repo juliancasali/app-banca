@@ -20,7 +20,7 @@ const userController = {
             const selectedUser = await User.findOne({email: req.body.email})
             if (selectedUser) {
                 return res.status(400).json({
-                    error: 'Email already exists',
+                    error: 'O email já existe',
                     code: 400
                 });
             }
@@ -30,7 +30,7 @@ const userController = {
 
             // Criação do novo usuário
             const user = new User({
-                name: req.body.name,
+                nome: req.body.nome,
                 email: req.body.email,
                 password: hashedPassword
             })
@@ -39,12 +39,12 @@ const userController = {
             // Salva o usuário no banco de dados
             const savedUser = await user.save()
             res.status(201).json({
-                message: 'User registered successfully',
+                message: 'Usuário registrado com sucesso',
                 user: savedUser
             });
         } catch (error) {
             res.status(500).json({
-                error: 'Internal Server Error',
+                error: 'Erro Interno do Servidor',
                 details: error.message,
                 code: 500
             });
@@ -64,42 +64,46 @@ const userController = {
 
             }
             // Verifica se o usuário existe
-            const selectedUser = await User.findOne({email: req.body.email})
-            if (!selectedUser) {
+            const user = await User.findOne({email: req.body.email})
+            if (!user) {
                 res.status(400).json({
-                    error: 'Email or password incorrect',
+                    error: 'Email ou senha incorretos',
                     code: 400
                 });
             }
 
             // Verifica se a senha está correta
-            const passwordAndUserMatch = await bcrypt.compareSync(req.body.password, selectedUser.password)
+            const passwordAndUserMatch = await bcrypt.compareSync(req.body.password, user.password)
             if (!passwordAndUserMatch) {
                 return res.status(400).json({
-                    error: 'Email or password incorrect',
+                    error: 'Email ou senha incorretos',
                     code: 400
                 });
             }
 
             // Gera o token JWT com tempo de expiração
             const token = jwt.sign(
-                {_id: selectedUser._id, admin: selectedUser.admin},
+                {_id: user._id, admin: user.admin},
                 process.env.TOKEN_KEY,
                 {expiresIn: '1h'} // Token expira em 1 hora
             );
 
             // Retorna o token para o cliente
             return res.status(200).json({
-                message: 'User logged successfully',
+                message: 'Usuário logado com sucesso',
                 token: token
             });
         } catch (error) {
             return res.status(500).json({
-                error: 'Internal Server Error',
+                error: 'Erro Interno do Servidor',
                 details: error.message,
                 code: 500
             });
         }
+    },
+
+    logout: async function (req, res) {
+        res.json({success: true});
     }
 };
 module.exports = userController;

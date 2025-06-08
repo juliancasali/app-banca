@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const boardController = require('../controllers/boardController')
+const boardController = require('../controllers/bancaController')
 
 const app = express();
 

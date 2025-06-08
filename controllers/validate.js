@@ -3,7 +3,7 @@ const Joi = require('@hapi/joi')
 // Validação de registro
 const registerValidate = (data) => {
     const schema = Joi.object({
-        name: Joi.string()
+        nome: Joi.string()
             .required()
             .min(3)
             .max(50)
