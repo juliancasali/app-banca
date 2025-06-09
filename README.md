@@ -81,7 +81,7 @@ Para contribuir com o projeto:
 - Abra um Pull Request.
 - 
 👥 Desenvolvido por
-Projeto desenvolvido no estágio obrigatório na Universidade do Vale do Rio dos Sinos (Unisinos) por Kevin Mulinari Kuhn.
+Projeto desenvolvido no estágio obrigatório na Universidade do Vale do Rio dos Sinos (Unisinos) por Julian Casali.
 📄 Licença
 Este projeto é desenvolvido como parte do estágio obrigatório da Unisinos.
 
