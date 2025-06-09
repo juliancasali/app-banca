@@ -69,9 +69,9 @@ A API deverá estar disponível em http://localhost:5000 (ou na porta definida n
 
 
 📦 Scripts Disponíveis
-- npm run dev – Inicia o servidor de desenvolvimento com nodemon.
-- npm start – Inicia o servidor em modo de produção.
-- npm run lint – Executa as verificações de linting para garantir a qualidade do código.
+-  "start": "nodemon ./bin/www" – Inicia o servidor de desenvolvimento com nodemon.
+  
+  
 🤝 Contribuição
 Para contribuir com o projeto:
 - Faça um fork do repositório.
@@ -79,17 +79,13 @@ Para contribuir com o projeto:
 - Commit suas mudanças.
 - Push para sua branch.
 - Abra um Pull Request.
-- 
+  
 👥 Desenvolvido por
 Projeto desenvolvido no estágio obrigatório na Universidade do Vale do Rio dos Sinos (Unisinos) por Julian Casali.
+
 📄 Licença
 Este projeto é desenvolvido como parte do estágio obrigatório da Unisinos.
 
----
-
-Esse README fornece uma visão geral do back end, detalhando a estrutura, tecnologias utilizadas, passos para instalação, execução e contribuição. Você pode personalizá-lo conforme os detalhes reais do seu projeto (como nomes de pastas, endpoints ou variáveis de ambiente) e mantê-lo atualizado para que outros desenvolvedores possam entender e contribuir com o sistema.
-
-Se precisar de mais detalhes ou ajustes, fique à vontade para perguntar!
 
 
 
