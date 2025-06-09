@@ -2,12 +2,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const connectDB = require('./database/db');
+const connectDB = require('./src/config/db');
 const cors = require('cors');
 
-const userRouter = require('./routes/userRouter');
-const professorRouter = require('./routes/professorRouter');
-const bancaRouter = require('./routes/bancaRouter');
+const userRouter = require('./src/routes/userRouter');
+const professorRouter = require('./src/routes/professorRouter');
+const bancaRouter = require('./src/routes/bancaRouter');
 
 const app = express();
 

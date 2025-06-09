@@ -26,7 +26,7 @@ Este back end foi projetado para ser escalável e seguro, oferecendo uma interfa
 
 ## 📁 Estrutura do Projeto
 
-- **src/server/** - Config da porta
+- **src/www/** - Config da porta
 - **src/Controllers/** -  Lógica dos endpoints
 - **src/conf/** - Configurações da aplicação do banco de dados
 - **src/Middlewares/** - Middlewares personalizados
