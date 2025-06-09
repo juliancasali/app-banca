@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const connectDB = require('./src/config/db');
+const connectDB = require('./src/database/db');
 const cors = require('cors');
 
 const userRouter = require('./src/routes/userRouter');
@@ -11,7 +11,7 @@ const bancaRouter = require('./src/routes/bancaRouter');
 
 const app = express();
 
-// Middlewares
+// middlewares
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
